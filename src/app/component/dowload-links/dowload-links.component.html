@@ -1,0 +1,34 @@
+<div style="margin:20px" >
+                    <table border="2" style="text-align:center" class="table table-striped table-dark  table-hover">
+                       
+                        <thead style="background-color: #32383e;">
+                            <th scope="col" style="padding-right:10px">Name</th>
+                            <th scope="col" style="padding-right:10px">Size</th>
+                            <th scope="col" style="padding-right:10px">seeds</th>
+                            <th scope="col" style="padding-right:10px">leechers</th>
+                            <th scope="col" style="padding-right:10px">Actions</th>
+                        </thead>
+                       
+                        <tbody>
+                            <tr *ngFor="let temp of downloadLinks">
+                                <td style="padding-right:10px; padding-left:10px"><span>{{temp.title}}</span></td>
+                                <td ><span>{{temp.size}}</span></td>
+                                <td ><span>{{temp.seeds}}</span></td>
+                                <td ><span>{{temp.leechers}}</span></td>
+                                <td ><button (click)="playStart(temp.torrentMagnetUrl)" ><i class="fa fa-play-circle" style="color: green; size:50px"  ></i></button></td>
+                            </tr>
+                        </tbody>    
+                        
+                        <!-- <div *ngFor="let temp of downloadLinks">
+                            <button  (click)='startVideoPlayer(temp.torrentMagnetUrl)' class="au-btn-submit" style="padding: 10px;"><span> {{temp.title}} </span></button>
+                            <span class="au-btn-submit" style="padding: 10px;">{{temp.size}}</span>
+                            <span class="au-btn-submit" style="padding: 10px;">{{temp.seeds}}</span>
+                            <span class="au-btn-submit" style="padding: 10px;">{{temp.leechers}}</span>
+                        </div> -->
+                    </table>
+
+                
+                    <app-play-link  [playLink]="playLink"></app-play-link>
+                
+                  
+</div>

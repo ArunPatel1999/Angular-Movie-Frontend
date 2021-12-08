@@ -1,0 +1,33 @@
+
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div class="row" style="text-align: center">
+
+                <!-- loop over the collection of products -->
+                <div *ngFor="let movie of movies" class="col-md-3">
+
+                    <div class="product-box" >
+                        <img src="{{ movie.large_cover_image}}" class="img-responsive">
+                        <h1>{{ movie.title }}</h1>
+                        <div class="price"> {{movie.year}}</div>
+                        <a routerLink="/movie/{{movie.id}}" class="primary-btn">Full Details</a>
+                    </div>
+
+                </div>
+
+                  <!-- If product not found -->
+                <div *ngIf="movies?.length == 0" class="alert alert-dark col-md-3" role="alert"> 
+                    <div class="product-box">
+                        <img src="assets/images/products/placeholder.png" class="img-responsive">
+                        <h1 class="text-danger">No Movie Found</h1>
+                        <div class="price">$0.0</div>
+                        <a routerLink="" class="primary-btn">Back</a>
+                    </div> 
+                <div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

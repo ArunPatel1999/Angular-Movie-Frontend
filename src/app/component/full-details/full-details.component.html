@@ -1,0 +1,36 @@
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div>
+
+                    <img src="{{ movie.large_cover_image }}"  class="detail-image" width="30%">
+
+                    <h3>{{movie.title}}</h3>
+                    <div class="price">{{movie.year}}</div> <br>
+                   
+                    <h4>Description</h4>
+                    <p>{{movie.description_full}}</p>
+
+                    <a routerLink="">Back to Home</a>
+
+                    <div>
+                        <!-- <button  *ngFor="let temp of downloadLinks" (click)='startVideoPlayer(temp.torrentMagnetUrl)' class="au-btn-submit" >{{temp.title}}</button> -->
+                            <select #myDropdown  style="margin-left: 30px;text-align: center;" class="primary-btn">
+                                <!-- (change)="dropDownChangePerPaze(+myDropdown.value)" -->
+                                <option [selected] ="language === 'English'">English</option>
+                                <option [selected] ="language === 'Hindi'">Hindi</option>
+                                <option [selected] ="language === 'Tamil'">Tamil</option>
+                                <option [selected] ="language === 'Telugu'">Telugu</option>
+                            </select>
+                            <button (click)="setMovieName(movie.title+' '+(myDropdown.value != 'English' ? myDropdown.value : ''))" class="primary-btn">Watch And Downloads Links</button>
+                    </div>
+
+                    <app-dowload-links *ngIf="buttonClick" [movieName]="movieName"></app-dowload-links>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

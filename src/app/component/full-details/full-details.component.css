@@ -1,0 +1,16 @@
+button.primary-btn{
+    background:#05143f;
+    padding:7px 20px;
+    margin-left: 100px;
+    text-align:center;
+    display:inline-block;
+    color:#fff;
+    border-radius:2px;
+    font-size:14px;
+    margin-top:5px
+}
+button.primary-btn:hover{
+    background:#0da8e4;
+    color:#fff
+}
+
