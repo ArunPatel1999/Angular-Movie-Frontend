@@ -24,8 +24,11 @@ export class MovieService {
     );
   }
 
+  // private backendUrl:string  = "https://localhost:8080/test/";
+  private backendUrl:string  = "https://angular-movie-backend.herokuapp.com/test/";
+
   public getDownloadLink(name:String):Observable<DownloadData[]> {
-    return this.httpClient.get<DownloadData[]>("http://localhost:8080/test/"+name);
+    return this.httpClient.get<DownloadData[]>(this.backendUrl+name);
   }
 
 }
