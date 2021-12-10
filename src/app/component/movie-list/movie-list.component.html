@@ -8,7 +8,8 @@
                 <div *ngFor="let movie of movies" class="col-md-3">
 
                     <div class="product-box" >
-                        <img src="{{ movie.large_cover_image}}" class="img-responsive">
+                        
+                        <img src="{{ movie.large_cover_image}}" onerror="this.onerror=null; this.src='assets/images/products/placeholder.png'" class="img-responsive">
                         <h1>{{ movie.title }}</h1>
                         <div class="price"> {{movie.year}}</div>
                         <a routerLink="/movie/{{movie.id}}" class="primary-btn">Full Details</a>

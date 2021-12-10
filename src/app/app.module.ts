@@ -12,7 +12,10 @@ import { FullDetailsComponent } from './component/full-details/full-details.comp
 import { DowloadLinksComponent } from './component/dowload-links/dowload-links.component';
 import { PlayLinkComponent } from './component/play-link/play-link.component';
 
+import { VideoPlayerTempComponent } from './component/video-player-temp/video-player-temp.component';
+
 const routes:Routes = [
+  {path:"movie/:id/play", component: VideoPlayerTempComponent},
   {path: "movie/:id", component: FullDetailsComponent},
   {path: "search/:keyword", component: MovieListComponent},
   {path: "category/:category", component: MovieListComponent},
@@ -29,7 +32,8 @@ const routes:Routes = [
     MovieListComponent,
     FullDetailsComponent,
     DowloadLinksComponent,
-    PlayLinkComponent
+    PlayLinkComponent,
+    VideoPlayerTempComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
