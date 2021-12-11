@@ -5,7 +5,7 @@
 
                 <div>
 
-                    <img src="{{ movie.large_cover_image }}"  class="detail-image" width="30%">
+                    <img src="{{ movie.large_cover_image }}" onerror="this.onerror=null; this.src='assets/images/products/placeholder.png'"   class="detail-image" width="30%">
 
                     <h3>{{movie.title}}</h3>
                     <div class="price">{{movie.year}}</div> <br>
@@ -13,7 +13,7 @@
                     <h4>Description</h4>
                     <p>{{movie.description_full}}</p>
 
-                    <a routerLink="">Back to Home</a>
+                    <a routerLink="" class="primary-btn">Back to Home</a>
 
                     <div style="padding-left: 75px;">
                         <!-- <button  *ngFor="let temp of downloadLinks" (click)='startVideoPlayer(temp.torrentMagnetUrl)' class="au-btn-submit" >{{temp.title}}</button> -->
