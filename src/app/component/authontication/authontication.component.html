@@ -1,0 +1,37 @@
+
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div class="row" style="text-align: center">
+
+
+                <div class="form-bg" style=" margin: auto; width: 50%;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
+                                <div class="form-container">
+                                    <!-- <form class="form-horizontal"> -->
+                                    <div class="form-horizontal">
+                                        <h3 class="title">User Login</h3>
+                                        <div class="form-group">
+                                            <span class="input-icon"><i class="fa fa-user"></i></span>
+                                            <input #myInput1 class="form-control" required type="text" placeholder="Username">
+                                        </div>
+                                        <div class="form-group">
+                                            <span class="input-icon"><i class="fa fa-lock"></i></span>
+                                            <input #myInput2 class="form-control" required type="password" placeholder="Password">
+                                        </div>                            
+                                        <button class="btn signin" (click)="login(myInput1, myInput2)">Login</button>
+                                    </div> 
+                                    <!-- </form> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

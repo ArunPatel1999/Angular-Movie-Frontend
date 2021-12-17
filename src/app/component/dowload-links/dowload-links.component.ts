@@ -15,13 +15,14 @@ export class DowloadLinksComponent implements OnInit {
   movieName: string = "";
   public downloadLinks: DownloadData[] =[]; 
   public playLink:string ;
+  public loader:boolean = true;
 
   constructor( private movieService:MovieService) { }
 
   ngOnInit(): void {}
   
   ngOnChanges(): void {
-    this.movieService.getDownloadLink(this.movieName).subscribe(data => { this.downloadLinks = data}); 
+    this.movieService.getDownloadLink(this.movieName).subscribe(data => { this.downloadLinks = data; this.loader = false;}); 
   }
 
   public playStart(playLink: string) {

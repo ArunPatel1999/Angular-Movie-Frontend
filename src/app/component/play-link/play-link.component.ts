@@ -8,12 +8,10 @@ import { Component, OnInit, Input} from '@angular/core';
 export class PlayLinkComponent implements OnInit {
 
 
-  @Input()
-  playLink: string = "";
-  
+  @Input() playLink: string = "";
+
   constructor() { }
   ngOnInit(): void { }
-
   ngOnChanges():void {
     
     if(this.playLink != "" && this.playLink != undefined )   {

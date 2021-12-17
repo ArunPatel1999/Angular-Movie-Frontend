@@ -9,10 +9,15 @@
                 <div *ngFor="let movie of movies" class="col-md-3">
 
                     <div class="product-box" >
-                        
                         <img src="{{ movie.large_cover_image}}" onerror="this.onerror=null; this.src='assets/images/products/placeholder.png'" style="height: 225px;" class="img-responsive">
-                        <h1>{{ movie.title }}</h1>
-                        <div class="price"> {{movie.year}}</div>
+                        <h1>{{ movie.title }} &nbsp;
+                            <div *ngIf="login">
+                                <button (click)="storeInBackendDatabase(movie)" *ngIf="!alreadySave && !tempMovieService.includes(movie.id)" >  <i class="fas fa-save fa-2x" style="color: green"></i>  </button>  
+                                <button (click)="deleteInBackendDatabase(movie)" *ngIf="alreadySave ||tempMovieService.includes(movie.id)" >   <i class="fas fa-trash fa-2x" style="color: rgb(141, 4, 15)"></i>  </button> 
+                            </div> 
+                        </h1> 
+
+                        <div class="price"> {{movie.year}} </div> 
                         <button class="primary-btn" (click)="fullDetails(movie)"> Full Details </button>
                         <!-- <a routerLink="/movie/{{movie.id}}" class="primary-btn">Full Details</a> -->
                     </div>

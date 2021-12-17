@@ -10,14 +10,13 @@ import { MovieService } from 'src/app/service/movie.service';
 export class VideoPlayerTempComponent implements OnInit {
 
   constructor(private movieService: MovieService) { }
+  public loader:boolean = true;
+
 
   ngOnInit(): void {
     let link = localStorage.getItem("videoLink");
-    console.log("link =>"+link);
-    
-    if(link != null && link.length > 0) {
+    if(link != null && link.length > 0) 
       this.startVideoPlayer(link)
-    }
   }
 
   ngOnDestroy() {

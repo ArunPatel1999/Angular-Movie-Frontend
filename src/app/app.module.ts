@@ -14,8 +14,11 @@ import { DowloadLinksComponent } from './component/dowload-links/dowload-links.c
 import { PlayLinkComponent } from './component/play-link/play-link.component';
 
 import { VideoPlayerTempComponent } from './component/video-player-temp/video-player-temp.component';
+import { AuthonticationComponent } from './component/authontication/authontication.component';
 
 const routes:Routes = [
+  {path:'login', component: AuthonticationComponent},
+  {path:'login/successful', component: AuthonticationComponent},
   {path:"movie/:id/play", component: VideoPlayerTempComponent},
   {path: "movie/:id", component: FullDetailsComponent},
   {path: "search/:keyword", component: MovieListComponent},
@@ -34,7 +37,8 @@ const routes:Routes = [
     FullDetailsComponent,
     DowloadLinksComponent,
     PlayLinkComponent,
-    VideoPlayerTempComponent
+    VideoPlayerTempComponent,
+    AuthonticationComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
