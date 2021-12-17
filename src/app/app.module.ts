@@ -16,7 +16,12 @@ import { PlayLinkComponent } from './component/play-link/play-link.component';
 import { VideoPlayerTempComponent } from './component/video-player-temp/video-player-temp.component';
 import { AuthonticationComponent } from './component/authontication/authontication.component';
 
+import { AuthonticationService } from './service/authontication.service';
+import { DirectDownloadLinkComponent } from './component/direct-download-link/direct-download-link.component';
+
 const routes:Routes = [
+  {path:'onlyDownloadLink/:name', component:DirectDownloadLinkComponent},
+  {path:"play", component: VideoPlayerTempComponent},
   {path:'login', component: AuthonticationComponent},
   {path:'login/successful', component: AuthonticationComponent},
   {path:"movie/:id/play", component: VideoPlayerTempComponent},
@@ -38,7 +43,8 @@ const routes:Routes = [
     DowloadLinksComponent,
     PlayLinkComponent,
     VideoPlayerTempComponent,
-    AuthonticationComponent
+    AuthonticationComponent,
+    DirectDownloadLinkComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -49,4 +55,13 @@ const routes:Routes = [
   providers: [MovieService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+  constructor(private authonticationService: AuthonticationService) {
+    authonticationService.getLoginStatus().subscribe(
+      data =>  this.authonticationService.isAuthenticated.next(true), 
+      err => this.authonticationService.isAuthenticated.next(false)
+    );
+
+  }
+ }

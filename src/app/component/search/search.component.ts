@@ -10,19 +10,23 @@ import { AuthonticationService } from "src/app/service/authontication.service";
 export class SearchComponent implements OnInit {
 
   public login: boolean = false;
-
+  
   constructor(private route:Router, private authonticationService:AuthonticationService) {  }
 
   ngOnInit(): void {
     this.authonticationService.isAuthenticated.subscribe(data => this.login = data );
-   }
+  }
 
   public doSearch(value:String)  {
     this.route.navigateByUrl(`/search/${value}`);
   }
 
+  public onlyDownloadLink(name:String)  {
+      this.route.navigateByUrl(`/onlyDownloadLink/${name}`);
+  }
+
   public logout(){
     this.authonticationService.logoutFuncation();
-    this.login = false;
   }
+
 }

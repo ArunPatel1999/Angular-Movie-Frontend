@@ -2,7 +2,12 @@
     <input #myInput type="text" placeholder=" Movie Name ..."   class="au-input au-input-xl" (keyup.enter)="doSearch(myInput.value)" />    
     <button class="au-btn-submit" (click)="doSearch(myInput.value)" > Search </button> 
     
+    <button class="au-btn-submit" style="margin-left: 20px; width:150px" (click)="onlyDownloadLink(myInput.value)" > Downloads Link </button> 
+
     <button class="au-btn-submit" *ngIf="login" style="margin-left: 20px;" (click)="logout()" > Logout </button> 
     
-
 </div>
+
+
+
+            

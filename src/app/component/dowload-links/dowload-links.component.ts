@@ -32,8 +32,7 @@ export class DowloadLinksComponent implements OnInit {
     // this.movieService.playLinkTemp=playLink;
     
     localStorage.setItem("videoLink", playLink);
-    window.location.href=window.location.href+"/play"
-    
+    window.location.href=window.location.href+"/play";
   }
 
 }

@@ -32,10 +32,6 @@ export class MovieListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authonticationService.getLoginStatus().subscribe(
-      data =>  this.authonticationService.isAuthenticated.next(true), 
-      err => this.authonticationService.isAuthenticated.next(false)
-    );
     this.activatedRoute.paramMap.subscribe(() => { this.listMovies(); });
     this.authonticationService.isAuthenticated.subscribe(data => this.login = data );
   }
@@ -79,7 +75,6 @@ export class MovieListComponent implements OnInit {
           this.pageNumber = data.data.page_number;
           this.perPageElement = data.data.limit;
           this.totalElement = data.data.movie_count;
-
         }else
           this.movies = [];
       });

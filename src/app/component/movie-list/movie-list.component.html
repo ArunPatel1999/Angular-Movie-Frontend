@@ -25,7 +25,7 @@
                 </div>
 
                   <!-- If product not found -->
-                <div *ngIf="movies?.length == 0" class="alert alert-dark col-md-3" role="alert"> 
+                <div *ngIf="totalElement === 0" class="alert alert-dark col-md-3" role="alert"> 
                     <div class="product-box">
                         <img src="assets/images/products/placeholder.png" class="img-responsive">
                         <h1 class="text-danger">No Movie Found</h1>
@@ -38,7 +38,7 @@
         
 
             <!-- begin footer -->
-            <div class="footer-pagination" *ngIf="movies?.length != 0">                
+            <div class="footer-pagination" *ngIf="totalElement != 0">                
                 <div class="row">
 
                     <div class="col-md-6"></div>
