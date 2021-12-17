@@ -15,7 +15,7 @@
 
                     <a routerLink="" class="primary-btn">Back to Home</a>
 
-                    <div style="padding-left: 75px;">
+                    <div style="padding-left: 75px;" *ngIf="showDownloadLink">
                         <!-- <button  *ngFor="let temp of downloadLinks" (click)='startVideoPlayer(temp.torrentMagnetUrl)' class="au-btn-submit" >{{temp.title}}</button> -->
                             <select #myDropdown  style="margin-left: 30px;text-align: center;" class="primary-btn">
                                 <!-- (change)="dropDownChangePerPaze(+myDropdown.value)" -->

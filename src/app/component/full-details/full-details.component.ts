@@ -16,6 +16,7 @@ export class FullDetailsComponent implements OnInit {
   public language:String = "Hindi";
   public movieName:string ;
   public buttonClick:boolean = false;
+  public showDownloadLink:boolean = false;
 
   constructor(private router:ActivatedRoute, private movieService:MovieService) { }
 
@@ -29,6 +30,7 @@ export class FullDetailsComponent implements OnInit {
   private getById() {
     this.movieService.getMovieById(Number(this.router.snapshot.paramMap.get("id"))).subscribe(data => { 
       this.movie = data;
+      this.showDownloadLink=true;
     });
   }
 
