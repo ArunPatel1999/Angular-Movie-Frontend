@@ -32,6 +32,10 @@ export class MovieListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authonticationService.getLoginStatus().subscribe(
+      data =>  this.authonticationService.isAuthenticated.next(true), 
+      err => this.authonticationService.isAuthenticated.next(false)
+    );
     this.activatedRoute.paramMap.subscribe(() => { this.listMovies(); });
     this.authonticationService.isAuthenticated.subscribe(data => this.login = data );
   }
