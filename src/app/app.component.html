@@ -1,0 +1,100 @@
+
+<div class="page-wrapper">
+
+  
+  <aside class="menu-sidebar d-none d-lg-block">
+    <div class="logo">
+      <a routerLink="/movies">
+        <img src="assets/images/webtab.png" style="height: 70px; width: 100px;"  alt="luv2shop" class="img-responsive">
+      </a>
+    </div>
+
+    <div class="menu-sidebar-content js-scrollbar1">
+      <nav class="navbar-sidebar">
+        <ul class="list-unstyled navbar-list">
+          <li>
+            <a routerLink="/category/comedy" routerLinkActive="active-link">COMEDY</a>
+          </li>
+          <li>
+            <a routerLink="/category/sci-fi" routerLinkActive="active-link">SCI-FI</a>
+          </li>
+          <li>
+            <a routerLink="/category/horror" routerLinkActive="active-link">HORROR</a>
+          </li>
+          <li>
+            <a routerLink="/category/romance" routerLinkActive="active-link">ROMANCE</a>
+          </li>
+          <li>
+            <a routerLink="/category/action" routerLinkActive="active-link">ACTION</a>
+          </li>
+          <li>
+            <a routerLink="/category/thriller" routerLinkActive="active-link">THRILLER</a>
+          </li>
+          <li>
+            <a routerLink="/category/drama" routerLinkActive="active-link">DRAMA</a>
+          </li>
+          <li>
+            <a routerLink="/category/mystery" routerLinkActive="active-link">MYSTERY</a>
+          </li>
+          <li>
+            <a routerLink="/category/crime" routerLinkActive="active-link">CRIME</a>
+          </li>
+          <li>
+            <a routerLink="/category/animation" routerLinkActive="active-link">ANIMATION</a>
+          </li>
+          <li>
+            <a routerLink="/category/adventure" routerLinkActive="active-link">ADVENTURE</a>
+          </li>
+          <li>
+            <a routerLink="/category/fantasy" routerLinkActive="active-link">FANTASY</a>
+          </li>
+          <li>
+            <a routerLink="/category/comedy-romance" routerLinkActive="active-link">COMEDY-ROMANCE</a>
+          </li>
+          <li>
+            <a routerLink="/category/action-comedy" routerLinkActive="active-link">ACTION-COMEDY</a>
+          </li>
+          <li>
+            <a routerLink="/category/superhero" routerLinkActive="active-link">SUPERHERO</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+  </aside>
+ 
+
+  <div class="page-container">
+    
+    <header class="header-desktop">
+      <div class="section-content section-content-p30">
+        <div class="container-fluid">
+          <div class="header-wrap">
+              
+            <app-search></app-search>
+        
+            
+          </div>
+          <div class="account-wrap"></div>
+        </div>
+      </div>
+       
+    </header>
+
+    
+    <router-outlet></router-outlet>
+    
+
+  </div>
+</div>
+
+
+
+<footer>
+  <ul>
+    <li><a href="#">About Us</a></li>
+    <li><a href="#">Contact Us</a></li>
+    <li><a href="#">Help</a></li>
+  </ul>
+</footer>
+
