@@ -35,7 +35,7 @@
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "node_modules/sweetalert2/dist/sweetalert2.js"
             ],
-            "scripts": []
+            "scripts": [ ]
           },
           "configurations": {
             "production": {
@@ -102,7 +102,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [ ]
           }
         }
       }

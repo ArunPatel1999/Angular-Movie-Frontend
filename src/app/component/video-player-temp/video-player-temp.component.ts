@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MovieService } from 'src/app/service/movie.service';
-
 @Component({
   selector: 'app-video-player-temp',
   templateUrl: './video-player-temp.component.html',
@@ -9,7 +7,7 @@ import { MovieService } from 'src/app/service/movie.service';
 })
 export class VideoPlayerTempComponent implements OnInit {
 
-  constructor(private movieService: MovieService) { }
+  constructor() { }
   
   ngOnInit(): void {
     let link = localStorage.getItem("videoLink");

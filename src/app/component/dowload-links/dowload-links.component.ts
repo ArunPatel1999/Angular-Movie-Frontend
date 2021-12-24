@@ -17,22 +17,26 @@ export class DowloadLinksComponent implements OnInit {
   public playLink:string ;
   public loader:boolean = true;
 
-  constructor( private movieService:MovieService) { }
+  constructor(private movieService:MovieService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   
   ngOnChanges(): void {
     this.movieService.getDownloadLink(this.movieName).subscribe(data => { this.downloadLinks = data; this.loader = false;}); 
   }
 
-  public playStart(playLink: string) {
+  public downloadAndplayStart(playLink: string, play:boolean) {
     this.playLink = playLink;
 
     //temp delete after find solution
     // this.movieService.playLinkTemp=playLink;
     
     localStorage.setItem("videoLink", playLink);
-    window.location.href=window.location.href+"/play";
+    if(play)
+      window.location.href=window.location.href+"/play";
+    // else 
+    //   new startDownload(playLink);
   }
+
 
 }

@@ -8,7 +8,11 @@
                     <img src="{{ movie.large_cover_image }}" onerror="this.onerror=null; this.src='assets/images/products/placeholder.png'"   class="detail-image" width="30%">
 
                     <h3>{{movie.title}}</h3>
-                    <div class="price">{{movie.year}}</div> <br>
+                    <div>  
+                        <p> Released Year : <span class="price">{{movie.year}} </span> &nbsp;&nbsp; 
+                            Runtime : <span class="price">{{movie.runtime /60 | number:'1.2-2' }} H  </span>  &nbsp;&nbsp;
+                            Rating : <span class="price">{{movie.rating}} </span>  </p>            
+                    </div> 
                    
                     <h4>Description</h4>
                     <p>{{movie.description_full}}</p>
@@ -28,6 +32,21 @@
                     </div>
 
                     <app-dowload-links *ngIf="buttonClick" [movieName]="movieName"></app-dowload-links>
+
+                    <br><br><br>     
+                    <div *ngIf="otherImageList.length > 0">
+                        <carousel [images]="otherImageList" [objectFit]="'cover'" [cellWidth]="'100%'" 
+                                  [height]="500" [width]="1000" [autoplay]="true" [dots]="true" 
+                                  [loop]="true" [borderRadius]="10" style=" margin-left:200px; margin-left:200px;">
+                        </carousel>
+                    </div>               
+
+                
+
+                    <br><br><br>
+                    <div *ngIf="movie.yt_trailer_code" class="embed-responsive embed-responsive-16by9" >
+                        <iframe width="1100" height="500" class="embed-responsive-item"  [src]="'https://www.youtube.com/embed/'+movie.yt_trailer_code+'?rel=0' | safe" allowfullscreen></iframe>
+                    </div>
 
                 </div>
             </div>

@@ -18,18 +18,28 @@ import { AuthonticationComponent } from './component/authontication/authonticati
 
 import { AuthonticationService } from './service/authontication.service';
 import { DirectDownloadLinkComponent } from './component/direct-download-link/direct-download-link.component';
+import { SafePipe } from './pipe/safe.pipe';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
+
+
 
 const routes:Routes = [
-  {path:'onlyDownloadLink/:name', component:DirectDownloadLinkComponent},
-  {path:"play", component: VideoPlayerTempComponent},
-  {path:'login', component: AuthonticationComponent},
-  {path:'login/successful', component: AuthonticationComponent},
-  {path:"movie/:id/play", component: VideoPlayerTempComponent},
+  {path: "play", component: VideoPlayerTempComponent},
+  {path: "movie/:id/play", component: VideoPlayerTempComponent},
+  
+  // {path: "download", component: VideoPlayerTempComponent},
+  
+  {path: 'login', component: AuthonticationComponent},
+  {path: 'login/successful', component: AuthonticationComponent},
+  
+  {path: 'onlyDownloadLink/:name', component:DirectDownloadLinkComponent},
   {path: "movie/:id", component: FullDetailsComponent},
+  
   {path: "search/:keyword", component: MovieListComponent},
   {path: "category/:category", component: MovieListComponent},
   {path: "category", component: MovieListComponent},
   {path: "movies", component: MovieListComponent},
+
   {path: "", redirectTo: 'movies', pathMatch:'full' },
   {path: "**", redirectTo: 'movies', pathMatch:'full' }
 ];
@@ -44,13 +54,15 @@ const routes:Routes = [
     PlayLinkComponent,
     VideoPlayerTempComponent,
     AuthonticationComponent,
-    DirectDownloadLinkComponent
+    DirectDownloadLinkComponent,
+    SafePipe
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    IvyCarouselModule
   ],
   providers: [MovieService],
   bootstrap: [AppComponent]

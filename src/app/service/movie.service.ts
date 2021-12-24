@@ -37,6 +37,10 @@ export class MovieService {
     return this.httpClient.get<GetResponseMovieListBackend>(BACKEND_URL+"/angularMovie"+endUrl);
   }
 
+  public getOtherImage(imdbId: String): Observable<string[]> {
+    return this.httpClient.get<string[]>(BACKEND_URL+"/imdb/"+imdbId);
+  }
+
   public storeInBackendDatabase(temp: Movie): Observable<Movie> {
     var headers = {"Authorization": "Bearer " + localStorage.getItem("jwtToken") };
     return this.httpClient.post<Movie>(BACKEND_URL+"/angularMovie", temp, {headers: headers});

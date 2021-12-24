@@ -17,11 +17,11 @@ export class FullDetailsComponent implements OnInit {
   public movieName:string ;
   public buttonClick:boolean = false;
   public showDownloadLink:boolean = false;
+  public otherImageList:any[] = [];
 
   constructor(private router:ActivatedRoute, private movieService:MovieService) { }
 
   ngOnInit(): void {
- 
     this.router.paramMap.subscribe(() => {       
       this.getById() ;
     });
@@ -29,7 +29,17 @@ export class FullDetailsComponent implements OnInit {
 
   private getById() {
     this.movieService.getMovieById(Number(this.router.snapshot.paramMap.get("id"))).subscribe(data => { 
-      this.movie = data;
+      this.movie = data;   
+     
+      this.movieService.getOtherImage(data.imdb_code).subscribe(imagesData => {
+        imagesData.reduce((r, path) => {
+            var temp:any = (r.children = r.children || []).find(q => q['path'] === path);
+            if (!temp) r.children.push(temp = { path });
+            return r;
+        }, { children: this.otherImageList });
+
+      });
+
       this.showDownloadLink=true;
     });
   }
@@ -39,5 +49,7 @@ export class FullDetailsComponent implements OnInit {
     this.movieName = movieName;
     this.buttonClick= true;
   }
+
+
 
 }
