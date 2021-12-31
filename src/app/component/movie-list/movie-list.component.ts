@@ -18,13 +18,14 @@ export class MovieListComponent implements OnInit {
   public movies: Movie[];
   private endUrl:String;
 
+  public pageNumberHide: boolean = false;
   public pageNumber: number = 1;
-  public perPageElement: number = 20;
-  public totalElement: number =0;
+  public perPageElement: number = 50;
+  public totalElement: number =1;
   
   public alreadySave = false;
 
-  public tempMovieService:number[];
+  public tempMovieService:string[];
   public login:boolean = false;
   
   constructor(private movieService: MovieService, private activatedRoute: ActivatedRoute, private router: Router, private authonticationService: AuthonticationService) {
@@ -33,13 +34,7 @@ export class MovieListComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(() => { this.listMovies(); });
-    this.authonticationService.isAuthenticated.subscribe(data => this.login = data );
-  }
-  
-  public dropDownChangePerPaze(perPageElement:number) {
-      this.perPageElement=perPageElement;
-      this.pageNumber=1;
-      this.getMovies();
+      this.authonticationService.isAuthenticated.subscribe(data => this.login = data );
   }
 
   public pageNumberChange() {
@@ -48,21 +43,44 @@ export class MovieListComponent implements OnInit {
 
   private listMovies() {
     if (this.activatedRoute.snapshot.paramMap.has("keyword"))   
-        this.endUrl = `?query_term=`+this.activatedRoute.snapshot.paramMap.get("keyword")+"&";
+        this.endUrl = `/search/`+this.activatedRoute.snapshot.paramMap.get("keyword");
     else if(this.activatedRoute.snapshot.paramMap.has("category"))   
-        this.endUrl = `?genre=`+this.activatedRoute.snapshot.paramMap.get("category")+"&";    
+        this.endUrl = `/genres/`+this.activatedRoute.snapshot.paramMap.get("category");    
     else 
-        this.endUrl = "? "; 
+        this.endUrl = "?"; 
 
     this.pageNumber = 1;
-    this.perPageElement = 20;
+    this.perPageElement = 50;
     
     this.getMovies();
   } 
 
   private getMovies() {
-    if(!this.endUrl.startsWith("? ")) this.getForTorrent(this.endUrl+"limit="+this.perPageElement+"&page="+this.pageNumber) 
-    else this.getForBackend(this.endUrl+"page="+(this.pageNumber-1)+"&size="+this.perPageElement);
+    if(this.endUrl.startsWith("/genres/")) 
+     this.getForImdb(this.endUrl+"/"+this.pageNumber) 
+    else if(this.endUrl.startsWith("/search/"))
+      this.getForTorrent(this.endUrl+"") 
+    else 
+      this.getForBackend(this.endUrl+"page="+(this.pageNumber-1)+"&size="+this.perPageElement);
+
+    if(this.endUrl.startsWith("/search/")) 
+      this.pageNumberHide = false;
+    else    
+      this.pageNumberHide = true;
+  }
+
+  private getForImdb(url:string) {
+    this.alreadySave = false;
+    this.movieService.getMoviesByGenre(url).subscribe(
+      data => {         
+        if (typeof data !== 'undefined') {
+          
+          this.movies = data.movies;
+          this.pageNumber = data.pageNumber;      
+          this.totalElement = data.totalElement;
+        }else
+          this.movies = [];
+      });
   }
 
   private getForTorrent(url:string) {
@@ -71,10 +89,9 @@ export class MovieListComponent implements OnInit {
       data => {         
         if (typeof data !== 'undefined') {
           
-          this.movies = data.data.movies;
-          this.pageNumber = data.data.page_number;
-          this.perPageElement = data.data.limit;
-          this.totalElement = data.data.movie_count;
+          this.movies = data;
+          this.pageNumber = 1;      
+          this.totalElement = 1;
         }else
           this.movies = [];
       });
@@ -88,7 +105,6 @@ export class MovieListComponent implements OnInit {
           
           this.movies = data.content;
           this.pageNumber = data.number+1;
-          this.perPageElement = data.size;
           this.totalElement = data.totalElements;
 
           this.movieService.saveId = this.movies.map(movie =>movie.id);
@@ -107,7 +123,7 @@ export class MovieListComponent implements OnInit {
 
   public storeInBackendDatabase(movie:Movie) {
     this.movieService.storeInBackendDatabase(movie).subscribe(
-      data => this.successMessage(data.title, 'Successful Add...'),
+      data => this.successMessage(data.name, 'Successful Add...'),
       err => this.errorMessage(err.error)
     );
     this.movieService.saveId.push(movie.id);
@@ -115,7 +131,7 @@ export class MovieListComponent implements OnInit {
 
   public deleteInBackendDatabase(movie:Movie) {  
     Swal.fire({  
-      title: movie.title,  
+      title: movie.name,  
       text: 'Are you sure want to remove?',  
       icon: 'warning',  
       showCancelButton: true,  
@@ -125,7 +141,7 @@ export class MovieListComponent implements OnInit {
       if (result.value) { 
         this.movieService.deleteInBackendDatabase(movie.id).subscribe(
           data => { 
-            this.successMessage(movie.title, 'Successful Delete...'),            
+            this.successMessage(movie.name, 'Successful Delete...'),            
             this.movieService.saveId.splice(this.movieService.saveId.findIndex(item => item == movie.id), 1);
           }, err => this.errorMessage(err.error.text)
         ) 

@@ -13,7 +13,7 @@ import { DowloadLinksComponent } from 'src/app/component/dowload-links/dowload-l
 export class FullDetailsComponent implements OnInit {
 
   public movie:Movie = new Movie();
-  public language:String = "Hindi";
+  public language:String = "ALL";
   public movieName:string ;
   public buttonClick:boolean = false;
   public showDownloadLink:boolean = false;
@@ -28,19 +28,16 @@ export class FullDetailsComponent implements OnInit {
   }
 
   private getById() {
-    this.movieService.getMovieById(Number(this.router.snapshot.paramMap.get("id"))).subscribe(data => { 
-      this.movie = data;   
-     
-      this.movieService.getOtherImage(data.imdb_code).subscribe(imagesData => {
-        imagesData.reduce((r, path) => {
-            var temp:any = (r.children = r.children || []).find(q => q['path'] === path);
-            if (!temp) r.children.push(temp = { path });
-            return r;
-        }, { children: this.otherImageList });
-
-      });
-
+    this.movieService.getMovieById(this.router.snapshot.paramMap.get("id")+"").subscribe(data => { 
+      this.movie = data;  
       this.showDownloadLink=true;
+      
+      this.movie.otherImages.reduce((r, path) => {
+        var temp:any = (r.children = r.children || []).find(q => q['path'] === path);
+        if (!temp) r.children.push(temp = { path });
+            return r;
+      }, { children: this.otherImageList });
+
     });
   }
 

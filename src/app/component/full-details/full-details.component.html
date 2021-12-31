@@ -5,17 +5,21 @@
 
                 <div>
 
-                    <img src="{{ movie.large_cover_image }}" onerror="this.onerror=null; this.src='assets/images/products/placeholder.png'"   class="detail-image" width="30%">
+                    <img src="{{ movie.image }}" onerror="this.onerror=null; this.src='assets/images/products/placeholder.png'"   class="detail-image" width="30%">
 
-                    <h3>{{movie.title}}</h3>
+                    <h3>{{movie.name}}</h3>
                     <div>  
-                        <p> Released Year : <span class="price">{{movie.year}} </span> &nbsp;&nbsp; 
-                            Runtime : <span class="price">{{movie.runtime /60 | number:'1.2-2' }} H  </span>  &nbsp;&nbsp;
-                            Rating : <span class="price">{{movie.rating}} </span>  </p>            
+                        <p> Released Year : <span class="price">{{movie.year }} </span> &nbsp;&nbsp; 
+                            Runtime : <span class="price">{{movie.runTime    }}   </span>  &nbsp;&nbsp;
+                            Rating : <span class="price">{{movie.imdbRating  }} </span>  </p>            
                     </div> 
                    
                     <h4>Description</h4>
-                    <p>{{movie.description_full}}</p>
+                    <p>{{movie.description}}</p>
+
+                    <br><br>
+                    <h4>Story Line</h4>
+                    <p>{{movie.story}}</p>
 
                     <a routerLink="" class="primary-btn">Back to Home</a>
 
@@ -23,12 +27,12 @@
                         <!-- <button  *ngFor="let temp of downloadLinks" (click)='startVideoPlayer(temp.torrentMagnetUrl)' class="au-btn-submit" >{{temp.title}}</button> -->
                             <select #myDropdown  style="margin-left: 30px;text-align: center;" class="primary-btn">
                                 <!-- (change)="dropDownChangePerPaze(+myDropdown.value)" -->
-                                <option [selected] ="language === 'English'">English</option>
+                                <option [selected] ="language === 'ALL'">ALL</option>
                                 <option [selected] ="language === 'Hindi'">Hindi</option>
                                 <option [selected] ="language === 'Tamil'">Tamil</option>
                                 <option [selected] ="language === 'Telugu'">Telugu</option>
                             </select>
-                            <button (click)="setMovieName(movie.title+' '+(myDropdown.value != 'English' ? myDropdown.value : ''))" class="primary-btn">Watch And Downloads Links</button>
+                            <button (click)="setMovieName(movie.name+' '+(myDropdown.value != 'ALL' ? myDropdown.value : ''))" class="primary-btn">Watch And Downloads Links</button>
                     </div>
 
                     <app-dowload-links *ngIf="buttonClick" [movieName]="movieName"></app-dowload-links>
@@ -44,8 +48,8 @@
                 
 
                     <br><br><br>
-                    <div *ngIf="movie.yt_trailer_code" class="embed-responsive embed-responsive-16by9" >
-                        <iframe width="1100" height="500" class="embed-responsive-item"  [src]="'https://www.youtube.com/embed/'+movie.yt_trailer_code+'?rel=0' | safe" allowfullscreen></iframe>
+                    <div *ngIf="movie.youtubeTrailer" class="embed-responsive embed-responsive-16by9" >
+                        <iframe width="1100" height="500" class="embed-responsive-item"  [src]="'https://www.youtube.com/embed/'+movie.youtubeTrailer+'?rel=0' | safe" allowfullscreen></iframe>
                     </div>
 
                 </div>

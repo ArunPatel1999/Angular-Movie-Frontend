@@ -71,7 +71,7 @@ export class AppModule {
 
   constructor(private authonticationService: AuthonticationService) {
     authonticationService.getLoginStatus().subscribe(
-      data =>  this.authonticationService.isAuthenticated.next(true), 
+      data =>  this.authonticationService.isAuthenticated.next(data), 
       err => this.authonticationService.isAuthenticated.next(false)
     );
 

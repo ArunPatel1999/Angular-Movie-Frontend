@@ -9,8 +9,8 @@
                 <div *ngFor="let movie of movies" class="col-md-3">
 
                     <div class="product-box" >
-                        <img src="{{ movie.large_cover_image}}" onerror="this.onerror=null; this.src='assets/images/products/placeholder.png'" style="height: 225px;" class="img-responsive">
-                        <h1>{{ movie.title }} &nbsp;
+                        <img src="{{ movie.image}}" onerror="this.onerror=null; this.src='assets/images/products/placeholder.png'" style="height: 225px;" class="img-responsive">
+                        <h1>{{ movie.name }} &nbsp;
                             <div *ngIf="login">
                                 <button (click)="storeInBackendDatabase(movie)" *ngIf="!alreadySave && !tempMovieService.includes(movie.id)" >  <i class="fas fa-save fa-2x" style="color: green"></i>  </button>  
                                 <button (click)="deleteInBackendDatabase(movie)" *ngIf="alreadySave ||tempMovieService.includes(movie.id)" >   <i class="fas fa-trash fa-2x" style="color: rgb(141, 4, 15)"></i>  </button> 
@@ -25,7 +25,7 @@
                 </div>
 
                   <!-- If product not found -->
-                <div *ngIf="totalElement === 0" class="alert alert-dark col-md-3" role="alert"> 
+                <div *ngIf="movies?.length === 0 " class="alert alert-dark col-md-3" role="alert"> 
                     <div class="product-box">
                         <img src="assets/images/products/placeholder.png" class="img-responsive">
                         <h1 class="text-danger">No Movie Found</h1>
@@ -38,7 +38,7 @@
         
 
             <!-- begin footer -->
-            <div class="footer-pagination" *ngIf="totalElement != 0">                
+            <div class="footer-pagination" *ngIf="totalElement != 0 && pageNumberHide">                
                 <div class="row">
 
                     <div class="col-md-6"></div>
@@ -53,16 +53,6 @@
                                                 (pageChange)="pageNumberChange()">
                                 </ngb-pagination>
 
-                            </div>
-
-                            <div class="col-md-3 mt-2" style="text-align:right;">
-                                <span class ="mr-2">Page Size   </span>
-                                <select #myDropdown (change)="dropDownChangePerPaze(+myDropdown.value)">
-                                    <option [selected] ="perPageElement == 10">10</option>
-                                    <option [selected] ="perPageElement == 20">20</option>
-                                    <option [selected] ="perPageElement == 30">30</option>
-                                    <option [selected] ="perPageElement == 50">50</option>                                    
-                                </select>
                             </div>
 
                         </div>

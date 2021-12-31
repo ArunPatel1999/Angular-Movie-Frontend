@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { environment } from '../../environments/environment';
-import { Observable, Subject, BehaviorSubject } from "rxjs";
+import { Observable, Subject, BehaviorSubject, of } from "rxjs";
 import { map } from "rxjs/operators";
 
 
@@ -17,8 +17,11 @@ export class AuthonticationService {
   constructor(private httpClient: HttpClient) { }
 
   public getLoginStatus():Observable<boolean> {
-    var headers = {"Authorization": "Bearer " + localStorage.getItem("jwtToken") };
-    return this.httpClient.get<boolean>(BACKEND_URL+"/authontication/loginStatus", {headers: headers});
+    if (localStorage.getItem("jwtToken") != null) {
+      var headers = {"Authorization": "Bearer " + localStorage.getItem("jwtToken") };
+      return this.httpClient.get<boolean>(BACKEND_URL+"/authontication/loginStatus", {headers: headers});
+    } else
+      return of(false);
   }
 
   public loginFuncation(username:string,password:string) : Observable<any> {

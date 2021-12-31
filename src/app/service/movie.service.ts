@@ -6,7 +6,7 @@ import { Observable, of } from "rxjs";
 import { map } from "rxjs/operators";
 import { environment } from '../../environments/environment';
 
-const YTS_LINK = environment.YTS_LINK;
+// const YTS_LINK = environment.YTS_LINK;
 const BACKEND_URL = environment.BACKEND_URL;
 
 @Injectable({
@@ -15,20 +15,24 @@ const BACKEND_URL = environment.BACKEND_URL;
 export class MovieService {
 
   public movie:Movie ;
-  public saveId:number[] =[];
+  public saveId:string[] =[];
 
   constructor(private httpClient: HttpClient) { }
 
-//==============YTS======================
-  public getMoviesByTorrent(endUrl: String): Observable<GetResponseMovieListFormTorrent> {
-    return this.httpClient.get<GetResponseMovieListFormTorrent>(YTS_LINK+"/list_movies.json"+endUrl).pipe( map(response => response) );
+//==============IMDB======================
+  public getMoviesByTorrent(endUrl: String): Observable<Movie[]> {
+    return this.httpClient.get<Movie[]>(BACKEND_URL+"/imdb"+endUrl); // .pipe( map(response => response) );
   }
 
-  public getMovieById(id:number):Observable<Movie> {    
-    if(this.movie == null || this.movie.id != id)
-      return this.httpClient.get<GetResponseMovie>(YTS_LINK+"/movie_details.json?movie_id="+id).pipe( map(response => response.data.movie) );
+  public getMoviesByGenre(endUrl: String): Observable<GetResponseMovieListFormIMDB> {
+    return this.httpClient.get<GetResponseMovieListFormIMDB>(BACKEND_URL+"/imdb"+endUrl); // .pipe( map(response => response) );
+  }
+
+  public getMovieById(id:string):Observable<Movie> {    
+    if(this.movie == null || this.movie.otherImages == null  || this.movie.otherImages?.length == 0)
+      return this.httpClient.get<Movie>(BACKEND_URL+"/imdb/"+id);
     else
-      return of(this.movie);  
+      return of(this.movie);
   }
 
 //=====================Backend==============================
@@ -37,16 +41,12 @@ export class MovieService {
     return this.httpClient.get<GetResponseMovieListBackend>(BACKEND_URL+"/angularMovie"+endUrl);
   }
 
-  public getOtherImage(imdbId: String): Observable<string[]> {
-    return this.httpClient.get<string[]>(BACKEND_URL+"/imdb/"+imdbId);
-  }
-
   public storeInBackendDatabase(temp: Movie): Observable<Movie> {
     var headers = {"Authorization": "Bearer " + localStorage.getItem("jwtToken") };
     return this.httpClient.post<Movie>(BACKEND_URL+"/angularMovie", temp, {headers: headers});
   }
 
-  public deleteInBackendDatabase(id: number): Observable<string> {
+  public deleteInBackendDatabase(id: string): Observable<string> {
     var headers = {"Authorization": "Bearer " + localStorage.getItem("jwtToken") };
     return this.httpClient.delete<string>(BACKEND_URL+"/angularMovie/"+id, {headers, responseType: 'text' as 'json'});
   }
@@ -57,13 +57,10 @@ export class MovieService {
 
 }
 
-interface GetResponseMovieListFormTorrent {
-  data: {
-    movies: Movie[];
-    movie_count: number;
-    limit: number;
-    page_number: number;
-  }
+interface GetResponseMovieListFormIMDB {
+  movies: Movie[];
+  totalElement: number;
+  pageNumber: number;
 }
 
 interface GetResponseMovieListBackend {
@@ -73,8 +70,8 @@ interface GetResponseMovieListBackend {
   number: number;
 }
 
-interface GetResponseMovie {
-  data: {
-    movie: Movie;
-  }
-}
+// interface GetResponseMovie {
+//   data: {
+//     movie: Movie;
+//   }
+// }

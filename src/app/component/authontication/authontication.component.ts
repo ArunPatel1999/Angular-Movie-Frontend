@@ -21,8 +21,9 @@ export class AuthonticationComponent implements OnInit {
 
   private loginStatus() {
     this.authonticationService.getLoginStatus().subscribe(data => { 
-        this.authonticationService.isAuthenticated.next(true);
-        this.router.navigate(['']); 
+        this.authonticationService.isAuthenticated.next(data);
+        if(data)
+          this.router.navigate(['']); 
       }, err => this.authonticationService.isAuthenticated.next(false)
     );
   }
