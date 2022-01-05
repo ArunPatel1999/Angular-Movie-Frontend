@@ -21,6 +21,14 @@
                     <h4>Story Line</h4>
                     <p>{{movie.story}}</p>
 
+                    <hr>
+                        <p><span><b> Director : </b> </span> {{movie.directors}} </p>
+                    <hr>
+                        <p><span><b> Writers : </b> </span> {{movie.writers}} </p>
+                    <hr>
+                        <p><span><b> Stars : </b> </span> {{movie.stars}} </p>
+                    <hr>
+
                     <a routerLink="" class="primary-btn">Back to Home</a>
 
                     <div style="padding-left: 75px;" *ngIf="showDownloadLink">
@@ -44,7 +52,6 @@
                                   [loop]="true" [borderRadius]="10" style=" margin-left:200px; margin-left:200px;">
                         </carousel>
                     </div>               
-
                 
 
                     <br><br><br>
